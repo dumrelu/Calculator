@@ -12,37 +12,62 @@ public interface ICalculator extends Remote
     // Seteaza primul operand folosit de operatii.
     public void setFirstOperand(double firstOperand) throws RemoteException;
     
+    // Indica daca primul operand a fost setat. Primul operator se seteaza
+    //ca fiind rezultatul ultimei operatii in mod automat.
+    // Primul operand va fi mereu setat cand nu au aparut erori.
+    public boolean isFirstOperandSet() throws RemoteException;
+    
     // Seteaza al doilea operand folosit de operatii.
     public void setSecondOperand(double secondOperand) throws RemoteException;
+    
+    // Indica daca al doilea operand a fost setat.
+    public boolean isSecondOperandSet() throws RemoteException;
     
     // Returneaza rezultatul ultimei operatiuni efectuate.
     public Result getResult() throws RemoteException;
     
     /*                          Operatii de baza.                        */
     
-    // op1 + op2
+    // r = op1 + op2
     public void add() throws RemoteException;
     
-    // op1 - op2
+    // r = op1 - op2
     public void subtract() throws RemoteException;
     
-    // op1 * op2
+    // r = op1 * op2
     public void multiply() throws RemoteException;
     
-    // op1 / op2
+    // r = op1 / op2
     public void divide() throws RemoteException;
     
     /*                          Operatii extinse.                        */
     
-    // op1 = 1/op1
+    // r = op1 = 1/op1
     public void invert() throws RemoteException;
     
-    // op1 ^ op2
+    // r = op1 ^ op2
     public void pow() throws RemoteException;
     
-    // op1!
+    // r = op1!
     public void factorial() throws RemoteException;
     
-    // sqrt(op1)
+    // r = sqrt(op1)
     public void sqrt() throws RemoteException;
+    
+    /*                          Operatii memorie.                        */
+    
+    // m = m + op
+    public void memoryAdd() throws RemoteException;
+    
+    // m = m - op
+    public void memorySubtract() throws RemoteException;
+    
+    // m = op
+    public void memoryStore() throws RemoteException;
+    
+    // op1 = m
+    public void memoryRead() throws RemoteException;
+    
+    // m = 0
+    public void memoryClear() throws RemoteException;
 }
