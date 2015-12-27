@@ -37,8 +37,10 @@ public class ExtendedOperationsTests {
     @Test
     public void invertTest() throws RemoteException
     {
-        calculator.setFirstOperand(2);
+        calculator.setFirstOperand(0);
+        calculator.setSecondOperand(2);
         calculator.invert();
+        calculator.add();
         
         Result result = calculator.getResult();
         assertFalse(result.hasError());

@@ -105,13 +105,14 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         
         if(m_secondOperandSet)
             m_secondOperand = result.getNumber();
-        m_firstOperand = result.getNumber();
+        else
+            m_firstOperand = result.getNumber();
     }
     
     @Override
     public void invert() throws RemoteException 
     {
-        setCurrentOperand(new Result(1.0 / m_firstOperand));
+        setCurrentOperand(new Result(1.0 / getCurrentOperand()));
     }
 
     @Override
@@ -125,7 +126,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     public void factorial() throws RemoteException 
     {
         int result = 1;
-        for(int i = (int) m_firstOperand; i > 1; --i)
+        for(int i = (int) getCurrentOperand(); i > 1; --i)
             result *= i;
         setCurrentOperand(new Result(result));
     }
@@ -133,7 +134,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     @Override
     public void sqrt() throws RemoteException 
     {
-        setCurrentOperand(new Result(Math.sqrt(m_firstOperand)));
+        setCurrentOperand(new Result(Math.sqrt(getCurrentOperand())));
     }
 
     @Override
