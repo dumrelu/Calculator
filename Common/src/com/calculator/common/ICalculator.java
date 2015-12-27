@@ -42,30 +42,30 @@ public interface ICalculator extends Remote
     
     /*                          Operatii extinse.                        */
     
-    // r = op1 = 1/op1
+    // opx = 1/opx
     public void invert() throws RemoteException;
     
     // r = op1 ^ op2
     public void pow() throws RemoteException;
     
-    // r = op1!
+    // opx = opx!
     public void factorial() throws RemoteException;
     
-    // r = sqrt(op1)
+    // opx = sqrt(opx)
     public void sqrt() throws RemoteException;
     
     /*                          Operatii memorie.                        */
     
-    // m = m + op
+    // m = m + opx
     public void memoryAdd() throws RemoteException;
     
-    // m = m - op
+    // m = m - opx
     public void memorySubtract() throws RemoteException;
     
-    // m = op
+    // m = opx
     public void memoryStore() throws RemoteException;
     
-    // op1 = m
+    // opx = m
     public void memoryRead() throws RemoteException;
     
     // m = 0
