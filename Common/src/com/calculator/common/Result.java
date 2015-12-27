@@ -33,4 +33,14 @@ public class Result implements Serializable
     {
         m_number = number;
     }
+    
+    public boolean hasError()
+    {
+        return false;
+    }
+    
+    public boolean hasNoError()
+    {
+        return !hasError();
+    }
 }
