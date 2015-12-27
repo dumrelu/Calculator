@@ -36,29 +36,62 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         return m_result;
     }
 
+    public void setResultNumber(double number)
+    {
+        m_result.setNumber(number);
+        m_firstOperand = number;
+    }
+    
     @Override
     public void add() throws RemoteException 
     {
         //Overflow?
-        m_result.setNumber(m_firstOperand + m_secondOperand);
+        setResultNumber(m_firstOperand + m_secondOperand);
     }
 
     @Override
     public void subtract() throws RemoteException 
     {
-        m_result.setNumber(m_firstOperand - m_secondOperand);
+       setResultNumber(m_firstOperand - m_secondOperand);
     }
 
     @Override
     public void multiply() throws RemoteException 
     {
-        m_result.setNumber(m_firstOperand * m_secondOperand);
+        setResultNumber(m_firstOperand * m_secondOperand);
     }
 
     @Override
     public void divide() throws RemoteException 
     {
-        m_result.setNumber(m_firstOperand / m_secondOperand);
+        setResultNumber(m_firstOperand / m_secondOperand);
+    }
+
+    @Override
+    public void invert() throws RemoteException 
+    {
+        setResultNumber(1.0 / m_firstOperand);
+    }
+
+    @Override
+    public void pow() throws RemoteException 
+    {
+        setResultNumber(Math.pow(m_firstOperand, m_secondOperand));
+    }
+
+    @Override
+    public void factorial() throws RemoteException 
+    {
+        int result = 1;
+        for(int i = (int) m_firstOperand; i > 1; --i)
+            result *= i;
+        setResultNumber(result);
+    }
+
+    @Override
+    public void sqrt() throws RemoteException 
+    {
+        setResultNumber(Math.sqrt(m_firstOperand));
     }
     
 }
