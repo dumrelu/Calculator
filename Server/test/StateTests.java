@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  *
  * @author Relu
  */
-public class StateTest {
+public class StateTests {
     
     private Calculator calculator;
     

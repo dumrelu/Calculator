@@ -12,6 +12,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     private double m_firstOperand;
     private boolean m_secondOperandSet;
     private double m_secondOperand;
+    private double m_memory;
 
     public Calculator() throws RemoteException
     {
@@ -20,6 +21,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         m_firstOperandSet = true;
         m_secondOperand = 0.0;
         m_secondOperandSet = false;
+        m_memory = 0;
     }
 
     @Override
@@ -152,31 +154,31 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     @Override
     public void memoryAdd() throws RemoteException 
     {
-        
+        m_memory += getCurrentOperand();
     }
 
     @Override
     public void memorySubtract() throws RemoteException 
     {
-        
+        m_memory -= getCurrentOperand();
     }
 
     @Override
     public void memoryStore() throws RemoteException 
     {
-        
+        m_memory = getCurrentOperand();
     }
 
     @Override
     public void memoryRead() throws RemoteException 
     {
-        
+        setCurrentOperand(new Result(m_memory));
     }
 
     @Override
     public void memoryClear() throws RemoteException 
     {
-        
+        m_memory = 0.0;
     }
     
 }
