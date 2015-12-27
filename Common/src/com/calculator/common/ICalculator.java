@@ -31,4 +31,18 @@ public interface ICalculator extends Remote
     
     // op1 / op2
     public void divide() throws RemoteException;
+    
+    /*                          Operatii extinse.                        */
+    
+    // op1 = 1/op1
+    public void invert() throws RemoteException;
+    
+    // op1 ^ op2
+    public void pow() throws RemoteException;
+    
+    // op1!
+    public void factorial() throws RemoteException;
+    
+    // sqrt(op1)
+    public void sqrt() throws RemoteException;
 }
