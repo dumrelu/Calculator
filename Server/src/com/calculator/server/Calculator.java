@@ -17,12 +17,6 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         m_firstOperand = 0.0;
         m_secondOperand = 0.0;
     }
-    
-    @Override
-    public String testMethod() throws RemoteException 
-    {
-        return "Hello World";
-    }
 
     @Override
     public void setFirstOperand(double firstOperand) throws RemoteException 

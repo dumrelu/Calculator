@@ -31,8 +31,4 @@ public interface ICalculator extends Remote
     
     // op1 / op2
     public void divide() throws RemoteException;
-    
-    
-    
-    public String testMethod() throws RemoteException;
 }

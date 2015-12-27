@@ -17,6 +17,7 @@ public class Main
         ICalculator calculator = (ICalculator) registry.lookup(Constants.CALCULATOR_NAME);
         
         System.out.println("Client started!");
-        System.out.println("Test message: " + calculator.testMethod());
+        
+        
     }
 }
