@@ -8,26 +8,32 @@ import java.rmi.server.UnicastRemoteObject;
 public class Calculator extends UnicastRemoteObject implements ICalculator
 {
     private Result m_result;
+    private boolean m_firstOperandSet;
     private double m_firstOperand;
+    private boolean m_secondOperandSet;
     private double m_secondOperand;
 
     public Calculator() throws RemoteException
     {
         m_result = new Result();
         m_firstOperand = 0.0;
+        m_firstOperandSet = true;
         m_secondOperand = 0.0;
+        m_secondOperandSet = false;
     }
 
     @Override
     public void setFirstOperand(double firstOperand) throws RemoteException 
     {
         m_firstOperand = firstOperand;
+        m_firstOperandSet = true;
     }
 
     @Override
     public void setSecondOperand(double secondOperand) throws RemoteException 
     {
         m_secondOperand = secondOperand;
+        m_secondOperandSet = true;
     }
 
     @Override
@@ -36,47 +42,83 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         return m_result;
     }
 
-    public void setResultNumber(double number)
+    private void setResult(Result result)
     {
-        m_result.setNumber(number);
-        m_firstOperand = number;
+        m_result = result;
+        m_firstOperandSet = false;
+        m_secondOperandSet = false;
+        
+        if(result.hasNoError())
+        {
+            m_firstOperand = result.getNumber();
+            m_firstOperandSet = true;
+        }
+    }
+    
+    private void checkSecondOperandValue()
+    {
+        if(!m_secondOperandSet)
+            m_secondOperand = m_firstOperand;
     }
     
     @Override
     public void add() throws RemoteException 
     {
+        checkSecondOperandValue();
         //Overflow?
-        setResultNumber(m_firstOperand + m_secondOperand);
+        setResult(new Result(m_firstOperand + m_secondOperand));
     }
 
     @Override
     public void subtract() throws RemoteException 
     {
-       setResultNumber(m_firstOperand - m_secondOperand);
+       checkSecondOperandValue();
+       setResult(new Result(m_firstOperand - m_secondOperand));
     }
 
     @Override
     public void multiply() throws RemoteException 
     {
-        setResultNumber(m_firstOperand * m_secondOperand);
+        checkSecondOperandValue();
+        setResult(new Result(m_firstOperand * m_secondOperand));
     }
 
     @Override
     public void divide() throws RemoteException 
     {
-        setResultNumber(m_firstOperand / m_secondOperand);
+        checkSecondOperandValue();
+        setResult(new Result(m_firstOperand / m_secondOperand));
     }
 
+    private double getCurrentOperand()
+    {
+        if(m_secondOperandSet)
+            return m_secondOperand;
+        return m_firstOperand;
+    }
+    
+    private void setCurrentOperand(Result result)
+    {
+        m_result = result;
+        if(result.hasError())
+            return;
+        
+        if(m_secondOperandSet)
+            m_secondOperand = result.getNumber();
+        m_firstOperand = result.getNumber();
+    }
+    
     @Override
     public void invert() throws RemoteException 
     {
-        setResultNumber(1.0 / m_firstOperand);
+        setCurrentOperand(new Result(1.0 / m_firstOperand));
     }
 
     @Override
     public void pow() throws RemoteException 
     {
-        setResultNumber(Math.pow(m_firstOperand, m_secondOperand));
+        checkSecondOperandValue();
+        setResult(new Result(Math.pow(m_firstOperand, m_secondOperand)));
     }
 
     @Override
@@ -85,13 +127,55 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         int result = 1;
         for(int i = (int) m_firstOperand; i > 1; --i)
             result *= i;
-        setResultNumber(result);
+        setCurrentOperand(new Result(result));
     }
 
     @Override
     public void sqrt() throws RemoteException 
     {
-        setResultNumber(Math.sqrt(m_firstOperand));
+        setCurrentOperand(new Result(Math.sqrt(m_firstOperand)));
+    }
+
+    @Override
+    public boolean isFirstOperandSet() throws RemoteException 
+    {
+        return m_firstOperandSet;
+    }
+
+    @Override
+    public boolean isSecondOperandSet() throws RemoteException 
+    {
+        return m_secondOperandSet;
+    }
+
+    @Override
+    public void memoryAdd() throws RemoteException 
+    {
+        
+    }
+
+    @Override
+    public void memorySubtract() throws RemoteException 
+    {
+        
+    }
+
+    @Override
+    public void memoryStore() throws RemoteException 
+    {
+        
+    }
+
+    @Override
+    public void memoryRead() throws RemoteException 
+    {
+        
+    }
+
+    @Override
+    public void memoryClear() throws RemoteException 
+    {
+        
     }
     
 }

@@ -35,7 +35,7 @@ public class StateTest {
     }
 
     @Test
-    public void firstTest() throws RemoteException
+    public void resultStateTest() throws RemoteException
     {
         calculator.setFirstOperand(1);
         calculator.setSecondOperand(2);
@@ -51,5 +51,22 @@ public class StateTest {
         result = calculator.getResult();
         assertFalse(result.hasError());
         assertEquals(12, calculator.getResult().getNumber(), 0.00001);
+    }
+    
+    @Test
+    public void isOperandSetTest() throws RemoteException
+    {
+        calculator.setFirstOperand(1);
+        assertTrue(calculator.isFirstOperandSet());
+        assertFalse(calculator.isSecondOperandSet());
+        calculator.setSecondOperand(2);
+        assertTrue(calculator.isSecondOperandSet());
+        calculator.add();
+        
+        Result result = calculator.getResult();
+        assertFalse(result.hasError());
+        assertEquals(3, calculator.getResult().getNumber(), 0.00001);
+        assertTrue(calculator.isFirstOperandSet());
+        assertFalse(calculator.isSecondOperandSet());
     }
 }
