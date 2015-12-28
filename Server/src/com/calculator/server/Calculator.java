@@ -189,5 +189,17 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
         m_secondOperand = 0.0;
         m_secondOperandSet = false;
     }
+
+    @Override
+    public double getFirstOperand() throws RemoteException 
+    {
+        return m_firstOperand;
+    }
+
+    @Override
+    public double getSecondOperand() throws RemoteException 
+    {
+        return m_secondOperand;
+    }
     
 }

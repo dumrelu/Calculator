@@ -12,6 +12,9 @@ public interface ICalculator extends Remote
     // Seteaza primul operand folosit de operatii.
     public void setFirstOperand(double firstOperand) throws RemoteException;
     
+    // Returneaza primul operand.
+    public double getFirstOperand() throws RemoteException;
+    
     // Indica daca primul operand a fost setat. Primul operator se seteaza
     //ca fiind rezultatul ultimei operatii in mod automat.
     // Primul operand va fi mereu setat cand nu au aparut erori.
@@ -19,6 +22,9 @@ public interface ICalculator extends Remote
     
     // Seteaza al doilea operand folosit de operatii.
     public void setSecondOperand(double secondOperand) throws RemoteException;
+    
+    // Returneaza al doilea operand.
+    public double getSecondOperand() throws RemoteException;
     
     // Indica daca al doilea operand a fost setat.
     public boolean isSecondOperandSet() throws RemoteException;
