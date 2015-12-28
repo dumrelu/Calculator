@@ -178,12 +178,14 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _2Button = new javax.swing.JButton();
         _3Button = new javax.swing.JButton();
         plusButton = new javax.swing.JButton();
+        expressionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(310, 470));
         setResizable(false);
         getContentPane().setLayout(null);
 
+        displayTextField.setEditable(false);
         displayTextField.setBackground(new java.awt.Color(255, 255, 255));
         displayTextField.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         displayTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -200,6 +202,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mcButton.setBorderPainted(false);
         mcButton.setContentAreaFilled(false);
         mcButton.setOpaque(true);
+        mcButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcButtonActionPerformed(evt);
+            }
+        });
         mcButton.addMouseListener(myMouseListener);
         jPanel1.add(mcButton);
 
@@ -208,6 +215,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mrButton.setBorderPainted(false);
         mrButton.setContentAreaFilled(false);
         mrButton.setOpaque(true);
+        mrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mrButtonActionPerformed(evt);
+            }
+        });
         mrButton.addMouseListener(myMouseListener);
         jPanel1.add(mrButton);
 
@@ -216,6 +228,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mpButton.setBorderPainted(false);
         mpButton.setContentAreaFilled(false);
         mpButton.setOpaque(true);
+        mpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mpButtonActionPerformed(evt);
+            }
+        });
         mpButton.addMouseListener(myMouseListener);
         jPanel1.add(mpButton);
 
@@ -224,6 +241,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mmButton.setBorderPainted(false);
         mmButton.setContentAreaFilled(false);
         mmButton.setOpaque(true);
+        mmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mmButtonActionPerformed(evt);
+            }
+        });
         mmButton.addMouseListener(myMouseListener);
         jPanel1.add(mmButton);
 
@@ -232,6 +254,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         msButton.setBorderPainted(false);
         msButton.setContentAreaFilled(false);
         msButton.setOpaque(true);
+        msButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msButtonActionPerformed(evt);
+            }
+        });
         msButton.addMouseListener(myMouseListener);
         jPanel1.add(msButton);
 
@@ -604,6 +631,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel7);
         jPanel7.setBounds(10, 340, 290, 50);
 
+        expressionLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(expressionLabel);
+        expressionLabel.setBounds(14, 10, 280, 0);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -751,11 +782,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void ceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceButtonActionPerformed
         displayTextField.setText("0");
-        m_operator = null;
     }//GEN-LAST:event_ceButtonActionPerformed
 
     private void cButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButtonActionPerformed
-        ceButtonActionPerformed(evt);
+        displayTextField.setText("0");
+        m_operator = null;
         
         try {
             m_calculator.reset();
@@ -795,6 +826,88 @@ public class CalculatorGUI extends javax.swing.JFrame {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_equalButtonActionPerformed
+
+    private void mcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcButtonActionPerformed
+        try {
+            m_calculator.memoryClear();
+        } catch (RemoteException ex) {
+            Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mcButtonActionPerformed
+
+    private void mrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrButtonActionPerformed
+        try {
+
+            if(m_operator == null || m_operator.wasExecuted())
+            {
+                m_calculator.memoryRead();
+                setDisplayNumber(m_calculator.getFirstOperand());
+            }
+            else
+            {
+                m_calculator.setSecondOperand(0);
+                m_calculator.memoryRead();
+                setDisplayNumber(m_calculator.getSecondOperand());
+            }
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mrButtonActionPerformed
+
+    private void msButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msButtonActionPerformed
+        try {
+            if(m_operator == null || m_operator.wasExecuted())
+            {
+                m_calculator.setFirstOperand(getCurrentDisplayValue());
+            }
+            else
+            {
+                m_calculator.setSecondOperand(getCurrentDisplayValue());
+            }
+            
+            m_calculator.memoryStore();
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_msButtonActionPerformed
+
+    private void mpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpButtonActionPerformed
+        try {
+            if(m_operator == null || m_operator.wasExecuted())
+            {
+                m_calculator.setFirstOperand(getCurrentDisplayValue());
+            }
+            else
+            {
+                m_calculator.setSecondOperand(getCurrentDisplayValue());
+            }
+            
+            m_calculator.memoryAdd();
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mpButtonActionPerformed
+
+    private void mmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmButtonActionPerformed
+        try {
+            if(m_operator == null || m_operator.wasExecuted())
+            {
+                m_calculator.setFirstOperand(getCurrentDisplayValue());
+            }
+            else
+            {
+                m_calculator.setSecondOperand(getCurrentDisplayValue());
+            }
+            
+            m_calculator.memorySubtract();
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mmButtonActionPerformed
 
     private double getCurrentDisplayValue()
     {
@@ -841,6 +954,16 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
     
+    private void setDisplayNumber(double number)
+    {
+        String numberString = Double.toString(number);
+        
+        if(number == (int) number)
+            numberString = numberString.substring(0, numberString.indexOf("."));
+        
+        displayTextField.setText(numberString);
+    }
+    
     private void executeOperand(Operator op) throws RemoteException 
     {
         if(op.wasExecuted())
@@ -856,12 +979,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
             return;
         }
         
-        String numberString = Double.toString(result.getNumber());
-        
-        if(result.getNumber() == (int) result.getNumber())
-            numberString = numberString.substring(0, numberString.indexOf("."));
-        
-        displayTextField.setText(numberString);
+        setDisplayNumber(result.getNumber());
     }
     
     /**
@@ -906,6 +1024,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JButton divideButton;
     private javax.swing.JButton dotButton;
     private javax.swing.JButton equalButton;
+    private javax.swing.JLabel expressionLabel;
     private javax.swing.JButton factorialButton;
     private javax.swing.JButton invertButton;
     private javax.swing.JPanel jPanel1;
