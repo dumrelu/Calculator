@@ -180,5 +180,14 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     {
         m_memory = 0.0;
     }
+
+    @Override
+    public void reset() throws RemoteException 
+    {
+        m_firstOperand = 0.0;
+        m_firstOperandSet = true;
+        m_secondOperand = 0.0;
+        m_secondOperandSet = false;
+    }
     
 }

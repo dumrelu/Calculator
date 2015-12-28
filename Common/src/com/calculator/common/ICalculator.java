@@ -26,6 +26,9 @@ public interface ICalculator extends Remote
     // Returneaza rezultatul ultimei operatiuni efectuate.
     public Result getResult() throws RemoteException;
     
+    // op1 = 0, op2 = unset.
+    public void reset() throws RemoteException;
+    
     /*                          Operatii de baza.                        */
     
     // r = op1 + op2
