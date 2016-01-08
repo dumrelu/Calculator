@@ -13,10 +13,12 @@ import java.io.Serializable;
 public class Result implements Serializable
 {
     private double m_number;
+    private String m_error;
     
     public Result(double number)
     {
         m_number = number;
+        m_error = null;
     }
     
     public Result()
@@ -24,9 +26,19 @@ public class Result implements Serializable
         this(0);
     }
     
+    public Result(String error)
+    {
+        m_error = error;
+    }
+    
     public double getNumber()
     {
         return m_number;
+    }
+    
+    public String getError()
+    {
+        return m_error;
     }
     
     public void setNumber(double number)
@@ -36,7 +48,7 @@ public class Result implements Serializable
     
     public boolean hasError()
     {
-        return false;
+        return m_error != null;
     }
     
     public boolean hasNoError()
