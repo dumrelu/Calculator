@@ -129,6 +129,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         
         initComponents();
         setTitle("Calculator");
+        setFocusable(true);
     }
 
     /**
@@ -183,6 +184,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(310, 470));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         displayTextField.setEditable(false);
@@ -195,7 +201,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(0, 132, 310, 10);
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         mcButton.setText("MC");
         mcButton.setBorder(null);
@@ -265,7 +271,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 100, 290, 30);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         invertButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         invertButton.setText("1/X");
@@ -326,7 +332,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 140, 290, 50);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         plusMinusButton.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         plusMinusButton.setText("\t±");
@@ -387,7 +393,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(10, 390, 290, 50);
 
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         ceButton.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         ceButton.setText("CE");
@@ -448,7 +454,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel4);
         jPanel4.setBounds(10, 190, 290, 50);
 
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
         _7Button.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         _7Button.setText("7");
@@ -509,7 +515,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel5);
         jPanel5.setBounds(10, 240, 290, 50);
 
-        jPanel6.setLayout(new java.awt.GridLayout());
+        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
 
         _4Button.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         _4Button.setText("4");
@@ -570,7 +576,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel6);
         jPanel6.setBounds(10, 290, 290, 50);
 
-        jPanel7.setLayout(new java.awt.GridLayout());
+        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
         _1Button.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         _1Button.setText("1");
@@ -908,6 +914,39 @@ public class CalculatorGUI extends javax.swing.JFrame {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mmButtonActionPerformed
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        switch(evt.getKeyChar())
+        {
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                addDigit(evt.getKeyChar());
+                break;
+            case '+':
+                plusButtonActionPerformed(null);
+                break;
+            case '-':
+                minusButtonActionPerformed(null);
+                break;
+            case '*':
+                multiplyButtonActionPerformed(null);
+                break;
+            case '/':
+                divideButtonActionPerformed(null);
+                break;
+            case '\n':
+                equalButtonActionPerformed(null);
+                break;
+        }
+    }//GEN-LAST:event_formKeyTyped
 
     private double getCurrentDisplayValue()
     {
