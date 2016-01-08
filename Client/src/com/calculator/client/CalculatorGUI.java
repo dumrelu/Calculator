@@ -1016,8 +1016,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         
         if(result.hasError())
         {
-            displayTextField.setText("Error");
-            cButtonActionPerformed(null);
+            displayTextField.setText(result.getError());
             return;
         }
         
