@@ -945,6 +945,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
             case '\n':
                 equalButtonActionPerformed(null);
                 break;
+            case '\b':
+                bButtonActionPerformed(null);
+                break;
         }
     }//GEN-LAST:event_formKeyTyped
 
