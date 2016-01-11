@@ -134,17 +134,23 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     @Override
     public void factorial() throws RemoteException 
     {
-        int result = 1;
+        double result = 1;
         int currentOperand = (int) getCurrentOperand();
-        if(currentOperand < 0)
+        if(currentOperand < 0 || getCurrentOperand() != currentOperand)
         {
             setCurrentOperand(new Result("Invalid input"));
             return;
         }
         
         for(int i = currentOperand; i > 1; --i)
+        {
             result *= i;
-        setCurrentOperand(new Result(result));
+        }
+        
+        if(Double.isInfinite(result))
+            setCurrentOperand(new Result("Overflow"));
+        else
+            setCurrentOperand(new Result(result));
     }
 
     @Override
