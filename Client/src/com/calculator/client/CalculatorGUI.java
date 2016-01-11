@@ -116,7 +116,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private final ICalculator m_calculator;
     private Operator m_operator;
     private boolean m_isDotSet;
-    private boolean shouldEraseFirst;
+    private boolean m_shouldErase;
     
     /**
      * Creates new form CalculatorGUI
@@ -125,7 +125,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     public CalculatorGUI(ICalculator calculator) {
         m_calculator = calculator;
         m_isDotSet = false;
-        shouldEraseFirst = false;
+        m_shouldErase = false;
         
         initComponents();
         setTitle("Calculator");
@@ -675,7 +675,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.ADD));
+            setOperator(new Operator(Operator.ADD));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -683,7 +683,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void invertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.INVERT));
+            setOperator(new Operator(Operator.INVERT));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -691,7 +691,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void minusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.SUBTRACT));
+            setOperator(new Operator(Operator.SUBTRACT));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -699,7 +699,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void multiplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.MULTIPLY));
+            setOperator(new Operator(Operator.MULTIPLY));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -707,7 +707,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.DIVIDE));
+            setOperator(new Operator(Operator.DIVIDE));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -715,7 +715,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void factorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorialButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.FACTORIAL));
+            setOperator(new Operator(Operator.FACTORIAL));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -723,7 +723,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void powButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.POWER));
+            setOperator(new Operator(Operator.POWER));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -731,26 +731,108 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void sqrtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqrtButtonActionPerformed
         try {
-            addOperator(new Operator(Operator.SQRT));
+            setOperator(new Operator(Operator.SQRT));
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sqrtButtonActionPerformed
 
-    private void addDigit(char digit)
+    private void setOperator(Operator operator) throws RemoteException 
     {
-        String text = displayTextField.getText();
-        
-        if(text.equals("0"))
-            text = "";
-        
-        if(shouldEraseFirst)
+        if(operator.getRequiredOperands() == 1)
         {
-            shouldEraseFirst = false;
-            text = "";
+            executeOperator(operator);
+        }
+        else
+        {
+            if(m_operator == null)
+            {
+                m_calculator.setFirstOperand(getDisplayValue());
+                m_operator = operator;
+                m_shouldErase = true;
+            }
+            else
+            {
+                m_calculator.setSecondOperand(getDisplayValue());
+                if(!m_operator.wasExecuted())
+                    executeOperator(m_operator);
+                m_operator = operator;
+            }
+        }
+    }
+    
+    public double getDisplayValue()
+    {
+        try
+        {
+            return Double.parseDouble(displayTextField.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            return 0.0;
+        }
+    }
+    
+    private void executeOperator(Operator operator) throws RemoteException
+    {
+        operator.execute(m_calculator);
+        m_shouldErase = true;
+        
+        Result result = m_calculator.getResult();
+        if(result.hasNoError())
+        {
+            m_calculator.setFirstOperand(result.getNumber());
         }
         
-        displayTextField.setText(text + digit);
+        setDisplayValue(result);
+    }
+    
+    private void setDisplayValue(Result result)
+    {
+        m_shouldErase = true;
+        if(result.hasError())
+        {
+            displayTextField.setText(result.getError());
+            m_operator = null;
+            m_isDotSet = false;
+            try {
+                m_calculator.reset();
+            } catch (RemoteException ex) {
+                Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            String numberString = Double.toString(result.getNumber());
+            if(numberString.endsWith(".0"))
+                numberString = numberString.substring(0, numberString.length()-2);
+            if(numberString.length() > 13)
+                numberString = numberString.substring(0, 14);
+            
+            displayTextField.setText(numberString);
+        }
+    }
+    
+    private void addDigit(char digit)
+    {
+        String currentText = displayTextField.getText();
+        
+        if(m_shouldErase)
+        {
+            currentText = "0";
+            m_shouldErase = false;
+        }
+        
+        if(currentText.equals("0"))
+        {
+            if(digit == '.')
+                currentText = "0.";
+            else
+                currentText = "";
+        }
+        
+        currentText += Character.toString(digit);
+        displayTextField.setText(currentText);
     }
     
     private void _1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__1ButtonActionPerformed
@@ -802,27 +884,28 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dotButtonActionPerformed
 
     private void plusMinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusMinusButtonActionPerformed
-        String text = displayTextField.getText();
-        
-        if(text.equals("0"))
+        String currentText = displayTextField.getText();
+        if(currentText.equals("0"))
             return;
         
-        if(text.startsWith("-"))
-            text = text.substring(1);
+        if(currentText.startsWith("-"))
+            currentText = currentText.substring(1);
         else
-            text = "-" + text;
-        
-        displayTextField.setText(text);
+            currentText = "-" + currentText;
+        displayTextField.setText(currentText);
     }//GEN-LAST:event_plusMinusButtonActionPerformed
 
     private void ceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceButtonActionPerformed
         displayTextField.setText("0");
+        m_shouldErase = false;
+        m_isDotSet = false;
     }//GEN-LAST:event_ceButtonActionPerformed
 
     private void cButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButtonActionPerformed
         displayTextField.setText("0");
         m_operator = null;
-        
+        m_shouldErase = false;
+        m_isDotSet = false;
         try {
             m_calculator.reset();
         } catch (RemoteException ex) {
@@ -831,32 +914,30 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cButtonActionPerformed
 
     private void bButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bButtonActionPerformed
-        String text = displayTextField.getText();
-        
-        if(text.length() == 1)
+        m_shouldErase = false;
+        if(getDisplayValue() == 0.0)
         {
-            text = "0";
+            displayTextField.setText("0");
+            return;
         }
-        else if(text.charAt(text.length()-1) == '.')
+        
+        String currentText = displayTextField.getText();
+        String newText = (currentText.length() == 1) ? "0" : currentText.substring(0, currentText.length()-1);
+        if(currentText.charAt(currentText.length()-1) == '.')
         {
-            text = text.substring(0, text.length()-1);
             m_isDotSet = false;
         }
-        else
-        {
-            text = text.substring(0, text.length()-1);
-        }
-        
-        displayTextField.setText(text);
+        displayTextField.setText(newText);
     }//GEN-LAST:event_bButtonActionPerformed
 
     private void equalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalButtonActionPerformed
         try {
-            if(m_operator != null)
-            {
-                addOperator(m_operator);
-                shouldEraseFirst = true;
-            }
+            if(m_operator == null)
+                return;
+            
+            if(!m_operator.wasExecuted())
+                m_calculator.setSecondOperand(getDisplayValue());
+            executeOperator(m_operator);
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -864,7 +945,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void mcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcButtonActionPerformed
         try {
-            m_calculator.memoryClear();
+            throw new RemoteException();
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -872,18 +953,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void mrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrButtonActionPerformed
         try {
-
-            if(m_operator == null || m_operator.wasExecuted())
-            {
-                m_calculator.memoryRead();
-                setDisplayNumber(m_calculator.getFirstOperand());
-            }
-            else
-            {
-                m_calculator.setSecondOperand(0);
-                m_calculator.memoryRead();
-                setDisplayNumber(m_calculator.getSecondOperand());
-            }
+throw new RemoteException();
+            
             
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -892,16 +963,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void msButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msButtonActionPerformed
         try {
-            if(m_operator == null || m_operator.wasExecuted())
-            {
-                m_calculator.setFirstOperand(getCurrentDisplayValue());
-            }
-            else
-            {
-                m_calculator.setSecondOperand(getCurrentDisplayValue());
-            }
-            
-            m_calculator.memoryStore();
+            throw new RemoteException();
             
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -910,16 +972,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void mpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpButtonActionPerformed
         try {
-            if(m_operator == null || m_operator.wasExecuted())
-            {
-                m_calculator.setFirstOperand(getCurrentDisplayValue());
-            }
-            else
-            {
-                m_calculator.setSecondOperand(getCurrentDisplayValue());
-            }
-            
-            m_calculator.memoryAdd();
+            throw new RemoteException();
             
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -928,16 +981,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void mmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmButtonActionPerformed
         try {
-            if(m_operator == null || m_operator.wasExecuted())
-            {
-                m_calculator.setFirstOperand(getCurrentDisplayValue());
-            }
-            else
-            {
-                m_calculator.setSecondOperand(getCurrentDisplayValue());
-            }
-            
-            m_calculator.memorySubtract();
+            throw new RemoteException();
             
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -980,79 +1024,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyTyped
 
-    private double getCurrentDisplayValue()
-    {
-        try 
-        {
-            double res = Double.parseDouble(displayTextField.getText());
-            return res;
-        }
-        catch(Exception e)
-        {
-            displayTextField.setText("0");
-            return 0.0;
-        }
-    }
-    
-    private void addOperator(Operator op) throws RemoteException
-    {
-        if(m_operator == null)
-        {
-            m_calculator.setFirstOperand(getCurrentDisplayValue());
-            shouldEraseFirst = true;
-            if(op.getRequiredOperands() == 2)
-            {
-                m_operator = op;
-            }
-            else if(op.getRequiredOperands() == 1)
-            {
-                executeOperand(op);
-            }
-        }
-        else if(m_operator != null)
-        {
-            m_calculator.setSecondOperand(getCurrentDisplayValue());
-            shouldEraseFirst = true;
-            if(op.getRequiredOperands() == 2)
-            {
-                executeOperand(m_operator);
-                m_operator = op;
-            }
-            else if(op.getRequiredOperands() == 1)
-            {
-                executeOperand(op);
-            }
-        }
-    }
-    
-    private void setDisplayNumber(double number)
-    {
-        String numberString = Double.toString(number);
-        
-        if(number == (int) number)
-            numberString = numberString.substring(0, numberString.indexOf("."));
-        
-        displayTextField.setText(numberString);
-    }
-    
-    private void executeOperand(Operator op) throws RemoteException 
-    {
-        if(op.wasExecuted())
-            return;
-        
-        op.execute(m_calculator);
-        Result result = m_calculator.getResult();
-        
-        if(result.hasError())
-        {
-            displayTextField.setText(result.getError());
-            m_operator = null;
-            return;
-        }
-        
-        setDisplayNumber(result.getNumber());
-    }
-    
     /**
      * @param args the command line arguments
      */
