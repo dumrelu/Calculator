@@ -15,6 +15,9 @@ public class Main
         Calculator calculator = new Calculator();
         registry.rebind(Constants.CALCULATOR_NAME, calculator);
         
+        CalculatorFactory factory = new CalculatorFactory();
+        registry.rebind(Constants.CALCULATOR_FACTORY_NAME, factory);
+        
         System.out.println("Server started!");
     }
     

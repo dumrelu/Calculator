@@ -7,6 +7,7 @@ package com.calculator.client;
 
 import com.calculator.common.Constants;
 import com.calculator.common.ICalculator;
+import com.calculator.common.ICalculatorFactory;
 import com.calculator.common.Result;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -1043,7 +1044,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 ICalculator calculator = null;
                 try {
                     registry = LocateRegistry.getRegistry("localhost", Constants.PORT);
-                    calculator = (ICalculator) registry.lookup(Constants.CALCULATOR_NAME);
+                    ICalculatorFactory factory = (ICalculatorFactory) registry.lookup(Constants.CALCULATOR_FACTORY_NAME);
+                    calculator = factory.createCalculator();
                 } catch (RemoteException ex) {
                     Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (NotBoundException ex) {
