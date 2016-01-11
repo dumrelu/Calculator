@@ -737,10 +737,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void setOperator(Operator operator) throws RemoteException 
     {
-        if(m_operator == null)
-                m_calculator.setFirstOperand(getDisplayValue());
-            else
-                m_calculator.setSecondOperand(getDisplayValue());
+        setCurrentOperand();
         
         if(operator.getRequiredOperands() == 1)
         {
@@ -941,9 +938,17 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_equalButtonActionPerformed
 
+    private void setCurrentOperand() throws RemoteException
+    {
+        if(m_operator == null)
+            m_calculator.setFirstOperand(getDisplayValue());
+        else
+            m_calculator.setSecondOperand(getDisplayValue());
+    }
+    
     private void mcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcButtonActionPerformed
         try {
-            throw new RemoteException();
+            m_calculator.memoryClear();
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -951,8 +956,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void mrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrButtonActionPerformed
         try {
-throw new RemoteException();
+            if(m_operator != null)
+            {
+                m_calculator.setSecondOperand(0);
+            }
             
+            m_calculator.memoryRead();
+            setDisplayValue(m_calculator.getResult());
             
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -961,8 +971,8 @@ throw new RemoteException();
 
     private void msButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msButtonActionPerformed
         try {
-            throw new RemoteException();
-            
+            setCurrentOperand();
+            m_calculator.memoryStore();
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -970,8 +980,8 @@ throw new RemoteException();
 
     private void mpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpButtonActionPerformed
         try {
-            throw new RemoteException();
-            
+            setCurrentOperand();
+            m_calculator.memoryAdd();
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -979,8 +989,8 @@ throw new RemoteException();
 
     private void mmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmButtonActionPerformed
         try {
-            throw new RemoteException();
-            
+            setCurrentOperand();
+            m_calculator.memorySubtract();
         } catch (RemoteException ex) {
             Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
