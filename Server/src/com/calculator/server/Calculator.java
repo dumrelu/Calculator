@@ -132,7 +132,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     @Override
     public void invert() throws RemoteException 
     {
-        double result = m_firstOperand / m_secondOperand;
+        double result = 1.0 / getCurrentOperand();
         if(Double.isNaN(result))
             setCurrentOperand(new Result("Undefined result"));
         else if(Double.isInfinite(result))
@@ -163,7 +163,7 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
             return;
         }
         
-        for(int i = (int) getCurrentOperand(); i > 1; --i)
+        for(int i = currentOperand; i > 1; --i)
             result *= i;
         setCurrentOperand(new Result(result));
     }
