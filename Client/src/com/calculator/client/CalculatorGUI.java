@@ -115,7 +115,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
     
     private final ICalculator m_calculator;
     private Operator m_operator;
-    private boolean m_isDotSet;
     private boolean m_shouldErase;
     
     /**
@@ -124,7 +123,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
      */
     public CalculatorGUI(ICalculator calculator) {
         m_calculator = calculator;
-        m_isDotSet = false;
         m_shouldErase = false;
         
         initComponents();
@@ -794,7 +792,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         {
             displayTextField.setText(result.getError());
             m_operator = null;
-            m_isDotSet = false;
             try {
                 m_calculator.reset();
             } catch (RemoteException ex) {
@@ -831,8 +828,15 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 currentText = "";
         }
         
-        currentText += Character.toString(digit);
-        displayTextField.setText(currentText);
+        if(digit == '.' && currentText.contains("."))
+        {
+            displayTextField.setText(currentText);
+        }
+        else
+        {
+            currentText += Character.toString(digit);
+            displayTextField.setText(currentText);
+        }
     }
     
     private void _1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__1ButtonActionPerformed
@@ -876,11 +880,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event__0ButtonActionPerformed
 
     private void dotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dotButtonActionPerformed
-        if(!m_isDotSet)
-        {
-            addDigit('.');
-            m_isDotSet = true;
-        }
+        addDigit('.');
     }//GEN-LAST:event_dotButtonActionPerformed
 
     private void plusMinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusMinusButtonActionPerformed
@@ -898,14 +898,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void ceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceButtonActionPerformed
         displayTextField.setText("0");
         m_shouldErase = false;
-        m_isDotSet = false;
     }//GEN-LAST:event_ceButtonActionPerformed
 
     private void cButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButtonActionPerformed
         displayTextField.setText("0");
         m_operator = null;
         m_shouldErase = false;
-        m_isDotSet = false;
         try {
             m_calculator.reset();
         } catch (RemoteException ex) {
@@ -923,10 +921,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         
         String currentText = displayTextField.getText();
         String newText = (currentText.length() == 1) ? "0" : currentText.substring(0, currentText.length()-1);
-        if(currentText.charAt(currentText.length()-1) == '.')
-        {
-            m_isDotSet = false;
-        }
+        
         displayTextField.setText(newText);
     }//GEN-LAST:event_bButtonActionPerformed
 
