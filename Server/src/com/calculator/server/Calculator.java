@@ -47,13 +47,14 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     private void setResult(Result result)
     {
         m_result = result;
-        m_firstOperandSet = false;
+        m_firstOperand = 0;
+        m_firstOperandSet = true;
+        m_secondOperand = 0;
         m_secondOperandSet = false;
         
         if(result.hasNoError())
         {
             m_firstOperand = result.getNumber();
-            m_firstOperandSet = true;
         }
     }
     
@@ -67,29 +68,46 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     public void add() throws RemoteException 
     {
         checkSecondOperandValue();
-        //Overflow?
-        setResult(new Result(m_firstOperand + m_secondOperand));
+        double result = m_firstOperand + m_secondOperand;
+        if(Double.isInfinite(result))
+            setResult(new Result("Overflow"));
+        else 
+            setResult(new Result(result));
     }
 
     @Override
     public void subtract() throws RemoteException 
     {
        checkSecondOperandValue();
-       setResult(new Result(m_firstOperand - m_secondOperand));
+       double result = m_firstOperand - m_secondOperand;
+        if(Double.isInfinite(result))
+            setResult(new Result("Overflow"));
+        else 
+            setResult(new Result(result));
     }
 
     @Override
     public void multiply() throws RemoteException 
     {
         checkSecondOperandValue();
-        setResult(new Result(m_firstOperand * m_secondOperand));
+        double result = m_firstOperand * m_secondOperand;
+        if(Double.isInfinite(result))
+            setResult(new Result("Overflow"));
+        else 
+            setResult(new Result(result));
     }
 
     @Override
     public void divide() throws RemoteException 
     {
         checkSecondOperandValue();
-        setResult(new Result(m_firstOperand / m_secondOperand));
+        double result = m_firstOperand / m_secondOperand;
+        if(Double.isNaN(result))
+            setResult(new Result("Undefined result"));
+        else if(Double.isInfinite(result))
+            setResult(new Result("Can't divide by 0"));
+        else
+            setResult(new Result(result));
     }
 
     private double getCurrentOperand()
@@ -114,20 +132,37 @@ public class Calculator extends UnicastRemoteObject implements ICalculator
     @Override
     public void invert() throws RemoteException 
     {
-        setCurrentOperand(new Result(1.0 / getCurrentOperand()));
+        double result = m_firstOperand / m_secondOperand;
+        if(Double.isNaN(result))
+            setCurrentOperand(new Result("Undefined result"));
+        else if(Double.isInfinite(result))
+            setCurrentOperand(new Result("Can't divide by 0"));
+        else
+            setCurrentOperand(new Result(result));
     }
 
     @Override
     public void pow() throws RemoteException 
     {
         checkSecondOperandValue();
-        setResult(new Result(Math.pow(m_firstOperand, m_secondOperand)));
+        double result = Math.pow(m_firstOperand, m_secondOperand);
+        if(Double.isInfinite(result))
+            setResult(new Result("Overflow"));
+        else 
+            setResult(new Result(result));
     }
 
     @Override
     public void factorial() throws RemoteException 
     {
         int result = 1;
+        int currentOperand = (int) getCurrentOperand();
+        if(currentOperand < 0)
+        {
+            setCurrentOperand(new Result("Invalid input"));
+            return;
+        }
+        
         for(int i = (int) getCurrentOperand(); i > 1; --i)
             result *= i;
         setCurrentOperand(new Result(result));
