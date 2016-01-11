@@ -77,6 +77,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -94,6 +95,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -111,6 +113,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -128,6 +131,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -145,6 +149,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -179,6 +184,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -199,6 +205,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -219,6 +226,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -239,6 +247,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -273,6 +282,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -293,6 +303,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -313,6 +324,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -333,6 +345,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -367,6 +380,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -387,6 +401,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -407,6 +422,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -427,6 +443,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -461,6 +478,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -481,6 +499,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -501,6 +520,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -521,6 +541,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -555,6 +576,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -575,6 +597,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -595,6 +618,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -615,6 +639,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -649,6 +674,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -669,6 +695,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -689,6 +716,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
@@ -709,6 +737,7 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>

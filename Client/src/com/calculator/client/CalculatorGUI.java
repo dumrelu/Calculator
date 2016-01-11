@@ -207,6 +207,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mcButton.setBorder(null);
         mcButton.setBorderPainted(false);
         mcButton.setContentAreaFilled(false);
+        mcButton.setFocusable(false);
         mcButton.setOpaque(true);
         mcButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +221,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mrButton.setBorder(null);
         mrButton.setBorderPainted(false);
         mrButton.setContentAreaFilled(false);
+        mrButton.setFocusable(false);
         mrButton.setOpaque(true);
         mrButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,6 +235,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mpButton.setBorder(null);
         mpButton.setBorderPainted(false);
         mpButton.setContentAreaFilled(false);
+        mpButton.setFocusable(false);
         mpButton.setOpaque(true);
         mpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,6 +249,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         mmButton.setBorder(null);
         mmButton.setBorderPainted(false);
         mmButton.setContentAreaFilled(false);
+        mmButton.setFocusable(false);
         mmButton.setOpaque(true);
         mmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +263,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         msButton.setBorder(null);
         msButton.setBorderPainted(false);
         msButton.setContentAreaFilled(false);
+        msButton.setFocusable(false);
         msButton.setOpaque(true);
         msButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +283,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         invertButton.setBorder(null);
         invertButton.setBorderPainted(false);
         invertButton.setContentAreaFilled(false);
+        invertButton.setFocusable(false);
         invertButton.setOpaque(true);
         invertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +298,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         powButton.setBorder(null);
         powButton.setBorderPainted(false);
         powButton.setContentAreaFilled(false);
+        powButton.setFocusable(false);
         powButton.setOpaque(true);
         powButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,6 +313,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         factorialButton.setBorder(null);
         factorialButton.setBorderPainted(false);
         factorialButton.setContentAreaFilled(false);
+        factorialButton.setFocusable(false);
         factorialButton.setOpaque(true);
         factorialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,6 +328,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         sqrtButton.setBorder(null);
         sqrtButton.setBorderPainted(false);
         sqrtButton.setContentAreaFilled(false);
+        sqrtButton.setFocusable(false);
         sqrtButton.setOpaque(true);
         sqrtButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,6 +348,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         plusMinusButton.setBorder(null);
         plusMinusButton.setBorderPainted(false);
         plusMinusButton.setContentAreaFilled(false);
+        plusMinusButton.setFocusable(false);
         plusMinusButton.setOpaque(true);
         plusMinusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,6 +363,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _0Button.setBorder(null);
         _0Button.setBorderPainted(false);
         _0Button.setContentAreaFilled(false);
+        _0Button.setFocusable(false);
         _0Button.setOpaque(true);
         _0Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,6 +378,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         dotButton.setBorder(null);
         dotButton.setBorderPainted(false);
         dotButton.setContentAreaFilled(false);
+        dotButton.setFocusable(false);
         dotButton.setOpaque(true);
         dotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,6 +393,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         equalButton.setBorder(null);
         equalButton.setBorderPainted(false);
         equalButton.setContentAreaFilled(false);
+        equalButton.setFocusable(false);
         equalButton.setOpaque(true);
         equalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,6 +413,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         ceButton.setBorder(null);
         ceButton.setBorderPainted(false);
         ceButton.setContentAreaFilled(false);
+        ceButton.setFocusable(false);
         ceButton.setOpaque(true);
         ceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,6 +428,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         cButton.setBorder(null);
         cButton.setBorderPainted(false);
         cButton.setContentAreaFilled(false);
+        cButton.setFocusable(false);
         cButton.setOpaque(true);
         cButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +443,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         bButton.setBorder(null);
         bButton.setBorderPainted(false);
         bButton.setContentAreaFilled(false);
+        bButton.setFocusable(false);
         bButton.setOpaque(true);
         bButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,6 +458,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         divideButton.setBorder(null);
         divideButton.setBorderPainted(false);
         divideButton.setContentAreaFilled(false);
+        divideButton.setFocusable(false);
         divideButton.setOpaque(true);
         divideButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -461,6 +478,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _7Button.setBorder(null);
         _7Button.setBorderPainted(false);
         _7Button.setContentAreaFilled(false);
+        _7Button.setFocusable(false);
         _7Button.setOpaque(true);
         _7Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -475,6 +493,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _8Button.setBorder(null);
         _8Button.setBorderPainted(false);
         _8Button.setContentAreaFilled(false);
+        _8Button.setFocusable(false);
         _8Button.setOpaque(true);
         _8Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -489,6 +508,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _9Button.setBorder(null);
         _9Button.setBorderPainted(false);
         _9Button.setContentAreaFilled(false);
+        _9Button.setFocusable(false);
         _9Button.setOpaque(true);
         _9Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -503,6 +523,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         multiplyButton.setBorder(null);
         multiplyButton.setBorderPainted(false);
         multiplyButton.setContentAreaFilled(false);
+        multiplyButton.setFocusable(false);
         multiplyButton.setOpaque(true);
         multiplyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,6 +543,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _4Button.setBorder(null);
         _4Button.setBorderPainted(false);
         _4Button.setContentAreaFilled(false);
+        _4Button.setFocusable(false);
         _4Button.setOpaque(true);
         _4Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -536,6 +558,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _5Button.setBorder(null);
         _5Button.setBorderPainted(false);
         _5Button.setContentAreaFilled(false);
+        _5Button.setFocusable(false);
         _5Button.setOpaque(true);
         _5Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -550,6 +573,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _6Button.setBorder(null);
         _6Button.setBorderPainted(false);
         _6Button.setContentAreaFilled(false);
+        _6Button.setFocusable(false);
         _6Button.setOpaque(true);
         _6Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -564,6 +588,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         minusButton.setBorder(null);
         minusButton.setBorderPainted(false);
         minusButton.setContentAreaFilled(false);
+        minusButton.setFocusable(false);
         minusButton.setOpaque(true);
         minusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -583,6 +608,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _1Button.setBorder(null);
         _1Button.setBorderPainted(false);
         _1Button.setContentAreaFilled(false);
+        _1Button.setFocusable(false);
         _1Button.setOpaque(true);
         _1Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -597,6 +623,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _2Button.setBorder(null);
         _2Button.setBorderPainted(false);
         _2Button.setContentAreaFilled(false);
+        _2Button.setFocusable(false);
         _2Button.setOpaque(true);
         _2Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -611,6 +638,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         _3Button.setBorder(null);
         _3Button.setBorderPainted(false);
         _3Button.setContentAreaFilled(false);
+        _3Button.setFocusable(false);
         _3Button.setOpaque(true);
         _3Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -625,6 +653,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         plusButton.setBorder(null);
         plusButton.setBorderPainted(false);
         plusButton.setContentAreaFilled(false);
+        plusButton.setFocusable(false);
         plusButton.setOpaque(true);
         plusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1017,6 +1046,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         if(result.hasError())
         {
             displayTextField.setText(result.getError());
+            m_operator = null;
             return;
         }
         
