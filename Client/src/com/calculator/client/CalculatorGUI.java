@@ -746,14 +746,14 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
         else
         {
-            if(m_operator == null)
+            if(m_operator == null || m_operator.wasExecuted())
             {
                 m_operator = operator;
                 m_shouldErase = true;
             }
             else
             {
-                if(!m_operator.wasExecuted())
+                if(!m_shouldErase)
                     executeOperator(m_operator);
                 m_operator = operator;
             }
@@ -941,7 +941,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void setCurrentOperand() throws RemoteException
     {
-        if(m_operator == null)
+        if(m_operator == null || m_operator.wasExecuted())
             m_calculator.setFirstOperand(getDisplayValue());
         else
             m_calculator.setSecondOperand(getDisplayValue());
